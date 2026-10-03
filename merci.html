@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merci Pascal & Sylvain !</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Patrick+Hand&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#ffd23f; --paper:#fffaf0; --ink:#1d2340; --red:#e63b2e; --green:#3bb273; --dots:#1d234022;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#e0a800;}
+}
+:root[data-theme="dark"]{--bg:#e0a800;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{
+  margin:0; min-height:100vh; background:var(--bg);
+  background-image:radial-gradient(var(--dots) 2px,transparent 2px); background-size:22px 22px;
+  font-family:'Patrick Hand','Comic Sans MS',cursive,sans-serif; color:var(--ink);
+  display:flex; justify-content:center; padding:28px 16px 48px;
+}
+main{width:100%; max-width:420px}
+h1{
+  font-family:'Bagel Fat One','Arial Black',sans-serif; font-weight:400;
+  font-size:clamp(3.2rem,16vw,5rem); line-height:.95; margin:8px 0 6px; text-align:center;
+  color:var(--red); text-shadow:3px 3px 0 var(--ink); transform:rotate(-3deg);
+}
+.sub{text-align:center; font-size:1.5rem; margin:0 0 22px}
+.ticket{
+  background:var(--paper); padding:22px 22px 26px; position:relative;
+  box-shadow:6px 6px 0 var(--ink); transform:rotate(1.2deg);
+  --z:10px;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/20px 100%;
+  mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/20px 100%;
+  filter:drop-shadow(5px 5px 0 var(--ink));
+  box-shadow:none;
+}
+.ticket h2{font-family:'Bagel Fat One',sans-serif; font-weight:400; font-size:1.6rem; margin:0; text-align:center}
+.ticket .where{text-align:center; margin:2px 0 14px; font-size:1.1rem}
+.row{display:flex; gap:8px; align-items:baseline; font-size:1.25rem; margin:9px 0}
+.row i{flex:1; border-bottom:2px dotted var(--ink); opacity:.4; transform:translateY(-4px)}
+.row b{white-space:nowrap}
+.total{border-top:3px solid var(--ink); margin-top:16px; padding-top:10px; font-size:1.6rem; display:flex; justify-content:space-between}
+.total b{color:var(--red)}
+.btn{
+  display:block; margin:26px auto 0; font:inherit; font-size:1.5rem; cursor:pointer;
+  background:var(--green); color:#fff; border:3px solid var(--ink); border-radius:999px; padding:10px 24px;
+  box-shadow:4px 4px 0 var(--ink); transition:transform .1s, box-shadow .1s;
+}
+.btn:hover{transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink)}
+.btn:focus-visible{outline:4px solid var(--ink); outline-offset:3px}
+.stamp{
+  position:absolute; right:10px; top:50%; border:5px solid var(--red); color:var(--red);
+  font-family:'Bagel Fat One',sans-serif; font-size:1.7rem; padding:4px 12px; border-radius:8px;
+  transform:rotate(-14deg) scale(3); opacity:0; pointer-events:none; text-align:center; line-height:1;
+}
+.stamp.on{opacity:.9; transform:rotate(-14deg) scale(1); transition:transform .25s cubic-bezier(.3,1.6,.5,1), opacity .15s}
+.ps{text-align:center; font-size:1.25rem; margin-top:26px}
+@media (prefers-reduced-motion:reduce){.stamp.on,.btn{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>MERCI<br>les gars !</h1>
+  <p class="sub">Pascal &amp; Sylvain, vous êtes des légendes.</p>
+
+  <section class="ticket" aria-label="Addition de la soirée">
+    <h2>Chez Pascal &amp; Sylvain</h2>
+    <p class="where">Addition de la soirée (version cœur)</p>
+
+    <div class="row"><span>Apéro « juste un verre »</span><i></i><b>3 h</b></div>
+    <div class="row"><span>Cacahuètes (stock illimité)</span><i></i><b>∞</b></div>
+    <div class="row"><span>Le repas, une tuerie</span><i></i><b>2 fois</b></div>
+    <div class="row"><span>Pascal qui nous explique le Wi-Fi</span><i></i><b>47 min</b></div>
+    <div class="row"><span>Mise à jour du canapé</span><i></i><b>v2.0 trop bien</b></div>
+    <div class="row"><span>Sylvain, chef de la soirée (et du frigo)</span><i></i><b>réassort OK</b></div>
+    <div class="row"><span>Inventaire des bouteilles</span><i></i><b>écart : 3</b></div>
+    <div class="row"><span>Bug détecté : on veut pas partir</span><i></i><b>non résolu</b></div>
+
+    <div class="total"><span>TOTAL À PAYER</span><b>0 €</b></div>
+    <div class="stamp" id="stamp">PAYÉ<br>en câlins</div>
+  </section>
+
+  <button class="btn" id="btn" type="button">Régler la note</button>
+
+  <p class="ps">PS : Pascal, on ne redémarre pas la box. Sylvain, pas d'audit de notre frigo. La prochaine fois, c'est chez nous !</p>
+</main>
+<script>
+(function(){
+  var btn=document.getElementById('btn'), stamp=document.getElementById('stamp');
+  var done=['Régler la note','Merci encore, vraiment !','Bon, on a dit 0 €…','Allez, on arrête 😄'];
+  var i=0;
+  btn.addEventListener('click',function(){
+    stamp.classList.add('on');
+    i=(i+1)%done.length;
+    btn.textContent=done[i];
+  });
+})();
+</script>
+</body>
+</html>
